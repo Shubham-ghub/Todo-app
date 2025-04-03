@@ -1,6 +1,12 @@
 import React from "react";
 
 const ListItem = ({todo, removeTodo, editTodo}) => {
+   
+      const [isChecked , setIsChecked ] = useState(false)
+    
+  const   handleChange = (e)=>{
+        setIsChecked(!isChecked)
+        }
 
    
 
@@ -10,10 +16,13 @@ const ListItem = ({todo, removeTodo, editTodo}) => {
             
             <span> 
                 
-                <h3 className="text-xl" > {todo.text}</h3>
+                <h3 className={`text-xl ${isChecked ? "line-through" : ""}`} > {todo.text}</h3>
             </span>
            
             <span >
+               <input type="checkbox"  value={isChecked} onChange={handleChange} />
+                <label>{isChecked ? "Checked ✅" : "Unchecked ❌"}</label>
+              
                 <button onClick= {() => editTodo(todo) }className="bg-yellow-400 p-1 rounded m-1   ">Edit </button>
                 <button onClick={()=> {removeTodo(todo.id)}} className="bg-red-400 p-1 rounded m-1 "> Delete</button>
             </span>
